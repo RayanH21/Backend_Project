@@ -13,7 +13,7 @@ class DiscussionSeeder extends Seeder
      */
     public function run(): void
     {
-        // Zorg ervoor dat er gebruikers in de database zijn
+        // Controleer of er gebruikers in de database zijn
         $users = User::all();
 
         if ($users->isEmpty()) {
@@ -26,17 +26,17 @@ class DiscussionSeeder extends Seeder
             [
                 'title' => 'How to build Ashe for the latest patch?',
                 'content' => 'I need advice on the best items for Ashe after the recent updates. Any tips?',
-                'user_id' => $users->random()->id,
+                'author_id' => $users->random()->id, // Gebruik de juiste kolomnaam
             ],
             [
                 'title' => 'What are the best jungle champions for solo queue?',
                 'content' => 'Looking for some strong jungle picks for climbing the ranked ladder.',
-                'user_id' => $users->random()->id,
+                'author_id' => $users->random()->id, // Gebruik de juiste kolomnaam
             ],
             [
                 'title' => 'Tips for climbing ranked in season 25',
                 'content' => 'Share your best tips and tricks for climbing ranked this season!',
-                'user_id' => $users->random()->id,
+                'author_id' => $users->random()->id, // Gebruik de juiste kolomnaam
             ],
         ];
 

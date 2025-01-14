@@ -20,7 +20,7 @@ class DiscussionFactory extends Factory
         return [
             'title' => $this->faker->sentence, // Genereert een willekeurige titel
             'content' => $this->faker->paragraphs(3, true), // Genereert willekeurige inhoud (3 paragrafen)
-            'user_id' => User::inRandomOrder()->first()->id, // Koppelt de discussie aan een willekeurige gebruiker
+            'author_id' => User::inRandomOrder()->first()->id, // Koppelt de discussie aan een willekeurige gebruiker
         ];
     }
 }

@@ -27,24 +27,32 @@
         </div>
     </div>
 
+    <!-- Recent Discussions -->
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
         <div class="p-6 text-gray-900 dark:text-gray-100">
             <h3 class="text-lg font-semibold mb-4">Recent Discussions</h3>
             <ul>
-                <li class="mb-2">
-                    <a href="#" class="text-blue-500 hover:underline">How to build Ashe for the latest patch?</a>
-                </li>
-                <li class="mb-2">
-                    <a href="#" class="text-blue-500 hover:underline">What are the best jungle champions for solo queue?</a>
-                </li>
-                <li class="mb-2">
-                    <a href="#" class="text-blue-500 hover:underline">Tips for climbing ranked in season 15.</a>
-                </li>
+                @foreach ($discussions as $discussion)
+                    <li class="mb-2">
+                        <a href="{{ route('discussions.show', $discussion->id) }}" class="text-blue-500 hover:underline">
+                            {{ $discussion->title }}
+                        </a>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            By: {{ $discussion->author ? $discussion->author->name : 'Unknown Author' }} | {{ $discussion->created_at->format('d M Y') }}
+                        </p>
+                        
+                    </li>
+                @endforeach
             </ul>
-            <a href="#" class="text-blue-500 hover:underline mt-4 block">View all discussions</a>
+            <a href="{{ route('discussions.index') }}" class="text-blue-500 hover:underline mt-4 block">
+                View all discussions
+            </a>
         </div>
     </div>
     
+    
+    
+    <!-- Latest News -->
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
         <div class="p-6 text-gray-900 dark:text-gray-100">
             <h3 class="text-lg font-semibold mb-4">Latest News</h3>
@@ -63,14 +71,16 @@
         </div>
     </div>
     
+    <!-- Admin Panel -->
     @if (Auth::user() && Auth::user()->is_admin)
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-    <div class="p-6 text-gray-900 dark:text-gray-100">
-        <h3 class="text-lg font-semibold mb-4">Admin Panel</h3>
-        <p>You have admin rights. Go to the <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:underline">Admin Dashboard</a>.</p>
-    </div>
-</div>
-@endif
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <h3 class="text-lg font-semibold mb-4">Admin Panel</h3>
+                <p>You have admin rights. Go to the 
+                    <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:underline">Admin Dashboard</a>.
+                </p>
+            </div>
+        </div>
+    @endif
 
-    
 </x-app-layout>

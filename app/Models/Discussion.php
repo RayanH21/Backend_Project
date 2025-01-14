@@ -12,12 +12,11 @@ class Discussion extends Model
     protected $fillable = [
         'title',
         'content',
-        'author_id',
+        'user_id',
     ];
 
-    // Relatie met de gebruiker (auteur van de discussie)
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
