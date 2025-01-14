@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\DiscussionController; // Zorg dat je de DiscussionController importeert
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,10 +15,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Voeg hier andere admin-specifieke routes toe
 });
 
-// Standaard gebruikersdashboard route
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Standaard gebruikersdashboard route met recente discussies
+Route::get('/dashboard', [DiscussionController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 // Gebruikersroutes
 Route::middleware('auth')->group(function () {

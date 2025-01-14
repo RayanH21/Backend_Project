@@ -13,11 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Optioneel: maak meerdere gebruikers aan
         // User::factory(10)->create();
 
+        // Maak een specifieke gebruiker aan
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Voeg de DiscussionSeeder toe
+        $this->call(DiscussionSeeder::class);
     }
 }

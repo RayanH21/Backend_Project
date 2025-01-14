@@ -17,12 +17,15 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        // Debugging: Toon een bericht als de middleware actief is
+        dd('Admin middleware actief');
+
         // Controleer of de gebruiker een admin is
         if (Auth::check() && Auth::user()->is_admin) {
             return $next($request);
         }
 
-        // Als de gebruiker geen admin is, stuur ze terug naar de homepage
-        return redirect('/dashboard')->with('Je hebt geen toegang tot deze pagina.');
+        // Als de gebruiker geen admin is, stuur naar het gebruikersdashboard
+        return redirect('/dashboard')->with('error', 'Je hebt geen toegang tot deze pagina.');
     }
 }
