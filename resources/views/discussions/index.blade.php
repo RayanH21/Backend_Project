@@ -17,7 +17,7 @@
             <!-- Button voor nieuwe discussie -->
             <div class="mb-4">
                 <a href="{{ route('discussions.create') }}" 
-                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    class="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-700">
                     Start a New Discussion
                 </a>
             </div>

@@ -40,7 +40,7 @@ class DiscussionController extends Controller
         Discussion::create([
             'title' => $request->title,
             'content' => $request->content,
-            'author_id' => auth()->id(),
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('discussions.index')->with('success', 'Discussion created successfully!');
