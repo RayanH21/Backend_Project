@@ -34,7 +34,7 @@
 
                         <!-- Submit Button -->
                         <div>
-                            <button type="submit" class="inline-block bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 transition">
+                            <button type="submit" class="inline-block bg-blue-500 text-black font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 transition">
                                 Send Message
                             </button>
                         </div>
