@@ -24,6 +24,11 @@
                     <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.index')">
                         {{ __('FAQ') }}
                     </x-nav-link>
+
+                    <!-- Contact Link -->
+                    <x-nav-link :href="route('contact.index')" :active="request()->routeIs('contact.index')">
+                        {{ __('Contact') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -90,6 +95,11 @@
             <!-- FAQ Link -->
             <x-responsive-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.index')">
                 {{ __('FAQ') }}
+            </x-responsive-nav-link>
+
+            <!-- Contact Link -->
+            <x-responsive-nav-link :href="route('contact.index')" :active="request()->routeIs('contact.index')">
+                {{ __('Contact') }}
             </x-responsive-nav-link>
         </div>
     </div>

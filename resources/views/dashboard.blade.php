@@ -71,7 +71,7 @@
             <a href="#" class="text-blue-500 hover:underline mt-4 block">View all news</a>
         </div>
     </div>
-    
+
     <!-- Admin Panel -->
     @if (Auth::user() && Auth::user()->is_admin)
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
@@ -83,5 +83,22 @@
             </div>
         </div>
     @endif
+
+    <footer class="bg-black text-black py-6">
+        <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+            <div class="flex justify-between">
+                <div class="space-x-6">
+                    <a href="{{ route('faq.index') }}" class="hover:text-gray-400 text-xl transition">{{ __('FAQ') }}</a>
+                    <a href="{{ route('contact.index') }}" class="hover:text-gray-400 text-xl transition">{{ __('Contact') }}</a>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">{{ __('© 2025 Your Company. All rights reserved.') }}</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    
+    
 
 </x-app-layout>

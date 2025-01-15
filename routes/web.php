@@ -6,6 +6,7 @@ use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AdminFaqController;
+use App\Http\Controllers\ContactController; // Voeg deze import toe
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,5 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Contactpagina routes
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index'); // Toon contactpagina
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store'); // Verzend contactformulier
 
 require __DIR__.'/auth.php';
