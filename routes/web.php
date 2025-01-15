@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DiscussionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReplyController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     
     // Specifieke discussie tonen
     Route::get('/discussions/{discussion}', [DiscussionController::class, 'show'])->name('discussions.show');
+
+    Route::post('/discussions/{discussion}/replies', [ReplyController::class, 'store'])->name('replies.store');
 });
 
 // Gebruikersroutes
