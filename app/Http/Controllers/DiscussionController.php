@@ -26,6 +26,7 @@ class DiscussionController extends Controller
 
     public function create()
     {
+        // Return de pagina voor het maken van een nieuwe discussie
         return view('discussions.create');
     }
 
@@ -48,6 +49,7 @@ class DiscussionController extends Controller
 
     public function show(Discussion $discussion)
     {
+        // Return de pagina voor een specifieke discussie
         return view('discussions.show', compact('discussion'));
     }
 }

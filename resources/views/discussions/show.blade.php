@@ -45,11 +45,8 @@
                     @if (auth()->check())
                         <form action="{{ route('replies.store', $discussion->id) }}" method="POST" class="mt-6">
                             @csrf
-                            <textarea 
-                                name="content" 
-                                rows="3" 
-                                class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200" 
-                                placeholder="Add your reply..."></textarea>
+                            <textarea name="content" rows="3" class="w-full border rounded-md p-2 resize-none overflow-hidden" placeholder="Add your reply..." oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';"></textarea>
+
                             <button type="submit" class="mt-2 bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600">Reply</button>
                         </form>
                     @else

@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
 
         // Voeg de DiscussionSeeder toe
         $this->call(DiscussionSeeder::class);
+
+        // Voeg de FaqSeeder toe
+        $this->call(FaqSeeder::class);
     }
 }

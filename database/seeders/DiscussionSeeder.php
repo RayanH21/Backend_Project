@@ -26,17 +26,17 @@ class DiscussionSeeder extends Seeder
             [
                 'title' => 'How to build Ashe for the latest patch?',
                 'content' => 'I need advice on the best items for Ashe after the recent updates. Any tips?',
-                'author_id' => $users->random()->id, // Gebruik de juiste kolomnaam
+                'user_id' => $users->random()->id, // Gebruik de juiste kolomnaam
             ],
             [
                 'title' => 'What are the best jungle champions for solo queue?',
                 'content' => 'Looking for some strong jungle picks for climbing the ranked ladder.',
-                'author_id' => $users->random()->id, // Gebruik de juiste kolomnaam
+                'user_id' => $users->random()->id, // Gebruik de juiste kolomnaam
             ],
             [
                 'title' => 'Tips for climbing ranked in season 25',
                 'content' => 'Share your best tips and tricks for climbing ranked this season!',
-                'author_id' => $users->random()->id, // Gebruik de juiste kolomnaam
+                'user_id' => $users->random()->id, // Gebruik de juiste kolomnaam
             ],
         ];
 
