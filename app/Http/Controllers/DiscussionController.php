@@ -7,12 +7,21 @@ use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Haal de 5 meest recente discussies op
-        $discussions = Discussion::latest()->take(5)->get();
+        // Zoekfunctionaliteit en paginatie
+        $search = $request->query('search');
+        $discussions = Discussion::query();
 
-        return view('dashboard', compact('discussions'));
+        if ($search) {
+            $discussions->where('title', 'like', "%{$search}%")
+                        ->orWhere('content', 'like', "%{$search}%");
+        }
+
+        // Haal 10 discussies op met paginatie
+        $discussions = $discussions->latest()->paginate(10);
+
+        return view('discussions.index', compact('discussions', 'search'));
     }
 
     public function create()
@@ -27,15 +36,11 @@ class DiscussionController extends Controller
             'content' => 'required|string',
         ]);
 
-        // Controleer of de gebruiker is ingelogd
-        if (!auth()->check()) {
-            abort(403, 'Unauthorized action.');
-        }
-
+        // Maak een nieuwe discussie aan
         Discussion::create([
             'title' => $request->title,
             'content' => $request->content,
-            'author_id' => auth()->id(), // Zorg ervoor dat dit werkt
+            'author_id' => auth()->id(),
         ]);
 
         return redirect()->route('discussions.index')->with('success', 'Discussion created successfully!');

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\DiscussionController; // Importeer DiscussionController
+use App\Http\Controllers\DiscussionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,7 +12,6 @@ Route::get('/', function () {
 // Admin-routes (alleen toegankelijk voor admins)
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    // Voeg hier andere admin-specifieke routes toe
 });
 
 // Standaard gebruikersdashboard route met recente discussies
