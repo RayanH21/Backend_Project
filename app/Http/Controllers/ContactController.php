@@ -2,31 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail; // Voeg dit toe als je emails wilt verzenden
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    // Toon de contactpagina
     public function index()
     {
-        return view('contact.index'); // Zorg ervoor dat je een view hebt voor de contactpagina
+        // Dit retourneert de contactpagina
+        return view('contact.index');
     }
 
-    // Verzend het contactformulier
     public function store(Request $request)
     {
-        // Validatie van het formulier
+        // Valideer de invoer
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'message' => 'required|string',
         ]);
 
-        // Hier kun je een e-mail sturen naar de admin
-        // Mail::to('admin@example.com')->send(new ContactFormMail($request->all()));
+        // Verzend de e-mail
+        Mail::to('your-email@example.com') // Vervang dit met je eigen e-mailadres
+            ->send(new ContactMessage($request->all()));
 
-        // Feedback aan de gebruiker
+        // Terug naar de contactpagina met een succesbericht
         return redirect()->route('contact.index')->with('success', 'Thank you for contacting us!');
     }
 }
+
