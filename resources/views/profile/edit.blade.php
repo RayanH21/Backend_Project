@@ -25,9 +25,9 @@
 
                         <!-- Birthday -->
                         <div class="mb-6">
-                            <label for="birthday" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('Birthday') }}</label>
-                            <input type="date" name="birthday" id="birthday" value="{{ old('birthday', Auth::user()->birthday) }}" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
-                            @error('birthday')
+                            <label for="birthdate" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('Birthday') }}</label>
+                            <input type="date" name="birthdate" id="birthdate" value="{{ old('birthdate', Auth::user()->birthdate) }}" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
+                            @error('birthdate')
                                 <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                             @enderror
                         </div>

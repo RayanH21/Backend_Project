@@ -33,8 +33,8 @@ class ProfileController extends Controller
         $user->fill($request->validated());
 
         // Update optionele velden
-        if ($request->filled('birthday')) {
-            $user->birthday = $request->input('birthday');
+        if ($request->filled('birthdate')) {
+            $user->birthdate = $request->input('birthdate');
         }
 
         if ($request->filled('about_me')) {

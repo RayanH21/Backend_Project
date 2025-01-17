@@ -21,7 +21,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'username' => 'required|string|max:255',
-            'birthday' => 'nullable|date',
+            'birthdate' => 'nullable|date',
             'about_me' => 'nullable|string|max:1000',
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'nullable|email|max:255|unique:users,email,' . $this->user()->id,
