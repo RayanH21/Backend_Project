@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Dynamische titel -->
+        <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,9 +17,10 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            <!-- Navigatiebalk -->
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
+            <!-- Pagina Header -->
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -27,10 +29,17 @@
                 </header>
             @endisset
 
-            <!-- Page Content -->
+            <!-- Hoofdinhoud -->
             <main>
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            <footer class="bg-white dark:bg-gray-800 text-center py-4 mt-10">
+                <p class="text-gray-500 dark:text-gray-400 text-sm">
+                    © {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.
+                </p>
+            </footer>
         </div>
     </body>
 </html>

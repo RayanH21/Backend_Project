@@ -8,6 +8,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserProfileController;
 
 // Publieke routes (voor iedereen toegankelijk)
 Route::get('/', function () {
@@ -20,26 +21,31 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/news', [NewsController::class, 'index'])->name('news.index'); // Nieuws overzicht
 Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show'); // Nieuws detailpagina
 
+// Publieke profielpagina (voor iedereen toegankelijk)
+Route::get('/profile/{user}', [UserProfileController::class, 'show'])->name('profile.show');
+
+// Dashboard toegankelijk voor iedereen
+Route::get('/dashboard', function () {
+    $discussions = \App\Models\Discussion::latest()->take(5)->get(); // Recentste 5 discussies
+    return view('dashboard', compact('discussions'));
+})->name('dashboard');
+
 // Routes voor ingelogde gebruikers
 Route::middleware(['auth'])->group(function () {
-    // Dashboard route
-    Route::get('/dashboard', function () {
-        $discussions = \App\Models\Discussion::latest()->take(5)->get(); // Recentste 5 discussies
-        return view('dashboard', compact('discussions'));
-    })->name('dashboard');
-
     // Gebruikersprofiel routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Discussies routes
-    Route::get('/discussions', [DiscussionController::class, 'index'])->name('discussions.index');
+    // Discussies routes (alleen voor ingelogde gebruikers)
     Route::get('/discussions/create', [DiscussionController::class, 'create'])->name('discussions.create');
     Route::post('/discussions', [DiscussionController::class, 'store'])->name('discussions.store');
-    Route::get('/discussions/{discussion}', [DiscussionController::class, 'show'])->name('discussions.show');
     Route::post('/discussions/{discussion}/replies', [ReplyController::class, 'store'])->name('replies.store');
 });
+
+// Publieke discussies bekijken (voor iedereen toegankelijk)
+Route::get('/discussions', [DiscussionController::class, 'index'])->name('discussions.index');
+Route::get('/discussions/{discussion}', [DiscussionController::class, 'show'])->name('discussions.show');
 
 // Routes voor admins
 Route::middleware(['auth', 'admin'])->group(function () {

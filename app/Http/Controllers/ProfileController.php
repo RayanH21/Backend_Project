@@ -7,8 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -29,24 +29,36 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        // Update the fields with validated data
+        // Update de velden met gevalideerde data
         $user->fill($request->validated());
 
-        // Handle the profile photo upload if a new photo is provided
+        // Update optionele velden
+        if ($request->filled('birthday')) {
+            $user->birthday = $request->input('birthday');
+        }
+
+        if ($request->filled('about_me')) {
+            $user->about_me = $request->input('about_me');
+        }
+
+        // Verwijder oude profielfoto en sla een nieuwe op
         if ($request->hasFile('profile_photo')) {
+            if ($user->profile_photo && Storage::disk('public')->exists($user->profile_photo)) {
+                Storage::disk('public')->delete($user->profile_photo);
+            }
             $path = $request->file('profile_photo')->store('profile_photos', 'public');
             $user->profile_photo = $path;
         }
 
-        // Handle email verification reset if email is changed
+        // Reset email verificatie als het emailadres verandert
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
-        // Save the updated user data
+        // Sla de bijgewerkte gegevens op
         $user->save();
 
-        // Redirect back with a success message
+        // Redirect terug naar de profielpagina met een succesmelding
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
@@ -64,10 +76,10 @@ class ProfileController extends Controller
         // Log out the user
         Auth::logout();
 
-        // Delete the user's data
+        // Verwijder de gebruiker
         $user->delete();
 
-        // Invalidate the session and regenerate the token
+        // Invalideer de sessie en genereer een nieuwe token
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
