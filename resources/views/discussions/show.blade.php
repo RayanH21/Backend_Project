@@ -11,7 +11,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-                        By: {{ $discussion->user->name ?? 'Unknown User' }} | {{ $discussion->created_at->format('d M Y') }}
+                        By {{ $discussion->author->name ?? 'Unknown' }} || {{ $discussion->created_at->format('d M Y') }}
                     </p>
                     <div class="mb-6">
                         {{ $discussion->content }}
