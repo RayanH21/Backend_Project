@@ -1,28 +1,26 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\AdminFaqController;
-use App\Http\Controllers\ContactController; // Voeg deze import toe
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\NewsController;
 
 // Publieke FAQ-pagina
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 // Admin-routes (alleen toegankelijk voor admins)
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/faq', [AdminFaqController::class, 'index'])->name('admin.faq.index');
-    Route::post('/admin/faq', [AdminFaqController::class, 'store'])->name('admin.faq.store');
-    Route::put('/admin/faq/{faq}', [AdminFaqController::class, 'update'])->name('admin.faq.update');
-    Route::delete('/admin/faq/{faq}', [AdminFaqController::class, 'destroy'])->name('admin.faq.destroy');
+    Route::resource('faqs', FaqController::class)->except('show');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [AdminUserController::class, 'create'])->name('users.create');
+    Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::put('/users/{user}/promote', [AdminUserController::class, 'promote'])->name('users.promote');
+    Route::put('/users/{user}/demote', [AdminUserController::class, 'demote'])->name('users.demote');
 });
 
 // Standaard gebruikersdashboard route met recente discussies
@@ -51,4 +49,5 @@ Route::middleware('auth')->group(function () {
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index'); // Toon contactpagina
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store'); // Verzend contactformulier
 
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 require __DIR__.'/auth.php';

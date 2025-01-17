@@ -20,6 +20,10 @@
                         {{ __('Discussions') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('news.index')" :active="request()->routeIs('news.index')">
+                        {{ __('Latest News') }}
+                    </x-nav-link>                    
+
                     <!-- FAQ Link -->
                     <x-nav-link :href="route('faq.index')" :active="request()->routeIs('faq.index')">
                         {{ __('FAQ') }}
@@ -32,9 +36,14 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <!-- Settings Dropdown and Admin Users Button -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
                 @auth
+                    @if (auth()->user()->is_admin)
+                        <a href="{{ route('users.index') }}" class="text-black bg-blue-500 font-bold py-2 px-4 rounded-md hover:bg-blue-600">
+                            {{ __('Users') }}
+                        </a>
+                    @endif
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">

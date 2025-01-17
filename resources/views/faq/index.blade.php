@@ -7,6 +7,18 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            @auth
+                @if (auth()->user()->is_admin) 
+                    <!-- Admin sectie: Toevoegen van nieuwe FAQ -->
+                    <div class="mb-4 text-right">
+                        <a href="{{ route('faqs.create') }}" class="inline-block bg-blue-500 text-black font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 transition">
+                            {{ __('Add FAQ') }}
+                        </a>
+                    </div>
+                @endif
+            @endauth
+
             @if ($faqs->isEmpty())
                 <p class="text-gray-500 dark:text-gray-400">No FAQs available at the moment.</p>
             @else

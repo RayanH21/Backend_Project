@@ -17,9 +17,6 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Debugging: Toon een bericht als de middleware actief is
-        dd('Admin middleware actief');
-
         // Controleer of de gebruiker een admin is
         if (Auth::check() && Auth::user()->is_admin) {
             return $next($request);

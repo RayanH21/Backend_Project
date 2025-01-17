@@ -45,4 +45,3 @@ class AdminFaqController extends Controller
         return redirect()->route('admin.faq.index')->with('success', 'FAQ verwijderd');
     }
 }
-

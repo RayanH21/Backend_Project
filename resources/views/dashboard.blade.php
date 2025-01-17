@@ -72,18 +72,6 @@
         </div>
     </div>
 
-    <!-- Admin Panel -->
-    @if (Auth::user() && Auth::user()->is_admin)
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-                <h3 class="text-lg font-semibold mb-4">Admin Panel</h3>
-                <p>You have admin rights. Go to the 
-                    <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:underline">Admin Dashboard</a>.
-                </p>
-            </div>
-        </div>
-    @endif
-
     <footer class="bg-black text-black py-6">
         <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
             <div class="flex justify-between">

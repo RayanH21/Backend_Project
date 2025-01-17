@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +20,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',     // Nieuw veld voor gebruikersnaam
+        'birthdate',    // Nieuw veld voor verjaardag
+        'about_me',     // Nieuw veld voor "over mij"
+        'profile_photo', // Nieuw veld voor profielfoto
+        'is_admin',
     ];
 
     /**
@@ -43,6 +47,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birthdate' => 'date', // Cast de birthdate naar een datum
+            'is_admin' => 'boolean',
         ];
     }
 }
