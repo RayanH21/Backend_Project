@@ -21,6 +21,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
     Route::put('/users/{user}/promote', [AdminUserController::class, 'promote'])->name('users.promote');
     Route::put('/users/{user}/demote', [AdminUserController::class, 'demote'])->name('users.demote');
+    Route::get('/admin/news', [NewsController::class, 'adminIndex'])->name('admin.news.index');
+    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/admin/news', [NewsController::class, 'store'])->name('admin.news.store');
+    Route::get('/admin/news/{news}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+    Route::put('/admin/news/{news}', [NewsController::class, 'update'])->name('admin.news.update');
+    Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 });
 
 // Standaard gebruikersdashboard route met recente discussies
@@ -50,4 +56,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store'); // Verzend contactformulier
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 require __DIR__.'/auth.php';

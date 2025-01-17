@@ -28,7 +28,7 @@ class FaqController extends Controller
         $request->validate([
             'question' => 'required',
             'answer' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required|exists:faq_categories,id',  // Validatie voor een geldige category_id
         ]);
 
         Faq::create([
@@ -41,22 +41,19 @@ class FaqController extends Controller
     }
 
     // Bewerken van een FAQ
-    public function edit($faq)
+    public function edit(Faq $faq)
     {
-        $faq = Faq::findOrFail($faq);
         $categories = FaqCategory::all();  // Haal de categorieën op
         return view('faq.edit', compact('faq', 'categories'));
     }
 
     // Bijwerken van een FAQ
-    public function update(Request $request, $faq)
+    public function update(Request $request, Faq $faq)
     {
-        $faq = Faq::findOrFail($faq);
-
         $request->validate([
             'question' => 'required',
             'answer' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required|exists:faq_categories,id',  // Validatie voor een geldige category_id
         ]);
 
         $faq->update([
@@ -69,11 +66,11 @@ class FaqController extends Controller
     }
 
     // Verwijderen van een FAQ
-    public function destroy($faq)
+    public function destroy(Faq $faq)
     {
-        $faq = Faq::findOrFail($faq);
         $faq->delete();
 
         return redirect()->route('faq.index')->with('success', 'FAQ verwijderd');
     }
 }
+

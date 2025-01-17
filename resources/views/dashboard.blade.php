@@ -55,22 +55,17 @@
     
     <!-- Latest News -->
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-        <div class="p-6 text-gray-900 dark:text-gray-100">
-            <h3 class="text-lg font-semibold mb-4">Latest News</h3>
-            <ul>
-                <li class="mb-2">
-                    <a href="#" class="text-blue-500 hover:underline">Season 15 Patch Notes Released!</a>
-                </li>
-                <li class="mb-2">
-                    <a href="#" class="text-blue-500 hover:underline">Top 5 Builds for ADC in Season 15</a>
-                </li>
-                <li class="mb-2">
-                    <a href="#" class="text-blue-500 hover:underline">Atakhan Revealed</a>
-                </li>
-            </ul>
-            <a href="#" class="text-blue-500 hover:underline mt-4 block">View all news</a>
-        </div>
+    <div class="p-6 text-gray-900 dark:text-gray-100">
+        <h3 class="text-lg font-semibold mb-4">Latest News</h3>
+        <ul>
+            <li class="mb-2">Season 15 Patch Notes Released!</li>
+            <li class="mb-2">Top 5 Builds for ADC in Season 15</li>
+            <li class="mb-2">Atakhan Revealed</li>
+        </ul>
+        <a href="{{ route('news.index') }}" class="text-blue-500 hover:underline mt-4 block">View all news</a>
     </div>
+</div>
+
 
     <footer class="bg-black text-black py-6">
         <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">

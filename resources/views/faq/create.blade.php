@@ -31,7 +31,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-md">Add FAQ</button>
+                            <button type="submit" class="inline-block bg-blue-500 text-black py-2 px-4 rounded-md">Add FAQ</button>
                         </div>
                     </form>
                 </div>

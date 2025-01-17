@@ -34,6 +34,24 @@
                                         <li class="mb-4">
                                             <p class="font-bold">{{ $faq->question }}</p>
                                             <p class="text-sm text-gray-600 dark:text-gray-400">{{ $faq->answer }}</p>
+                                            
+                                            @auth
+                                                @if (auth()->user()->is_admin)
+                                                    <!-- Edit Button -->
+                                                    <a href="{{ route('faqs.edit', $faq->id) }}" class="text-blue-500 hover:text-blue-700 text-sm mr-2">
+                                                        Edit
+                                                    </a>
+
+                                                    <!-- Delete Button with Confirmation -->
+                                                    <form action="{{ route('faqs.destroy', $faq->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this FAQ?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-500 hover:text-red-700 text-sm">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endauth
                                         </li>
                                     @endforeach
                                 </ul>
