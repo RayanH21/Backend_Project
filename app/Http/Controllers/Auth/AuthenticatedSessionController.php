@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         // Controleer of de gebruiker een admin is
         if (Auth::user()->is_admin) {
             // Redirect naar het admin dashboard
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('dashboard'));
         }
 
         // Anders stuur naar de standaard dashboard voor gebruikers
@@ -50,6 +50,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('');
     }
 }
