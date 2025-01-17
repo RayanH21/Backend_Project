@@ -11,7 +11,15 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-                        By {{ $discussion->author->name ?? 'Unknown' }} || {{ $discussion->created_at->format('d M Y') }}
+                        By 
+                        @if ($discussion->author)
+                            <a href="{{ route('profile.show', $discussion->author->id) }}" class="text-blue-500 hover:underline">
+                                {{ $discussion->author->username ?? 'Unknown Username' }}
+                            </a>
+                        @else
+                            Unknown Author
+                        @endif
+                        || {{ $discussion->created_at->format('d M Y') }}
                     </p>
                     <div class="mb-6">
                         {{ $discussion->content }}
@@ -30,7 +38,13 @@
                     @forelse ($discussion->replies as $reply)
                         <div class="mb-4 border border-gray-300 rounded-md p-4 bg-gray-50 dark:bg-gray-700">
                             <p class="font-medium text-gray-800 dark:text-gray-200">
-                                {{ $reply->user->name ?? 'Deleted User' }}
+                                @if ($reply->user)
+                                    <a href="{{ route('profile.show', $reply->user->id) }}" class="text-blue-500 hover:underline">
+                                        {{ $reply->user->username ?? 'Unknown Username' }}
+                                    </a>
+                                @else
+                                    Deleted User
+                                @endif
                             </p>
                             <p class="text-gray-600 dark:text-gray-400">{{ $reply->content }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-500">

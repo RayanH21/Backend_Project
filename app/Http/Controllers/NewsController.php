@@ -13,6 +13,11 @@ class NewsController extends Controller
         return view('news.index', compact('newsItems'));
     }
 
+    public function create()
+    {
+        return view('news.create'); // View voor het toevoegen van nieuws
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -34,9 +39,15 @@ class NewsController extends Controller
         return redirect()->route('news.index')->with('success', 'News item created successfully!');
     }
 
+    public function show(News $news)
+    {
+        // Laad het specifieke nieuwsitem en stuur het naar de view
+        return view('news.show', compact('news'));
+    }
+
     public function edit(News $news)
     {
-        return view('news.index', compact('news'));
+        return view('news.edit', compact('news')); // View voor het bewerken van nieuws
     }
 
     public function update(Request $request, News $news)
@@ -50,6 +61,9 @@ class NewsController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('news_images', 'public');
+            if ($news->image) {
+                \Storage::disk('public')->delete($news->image);
+            }
             $news->update(['image' => $imagePath]);
         }
 
@@ -60,10 +74,12 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
+        if ($news->image) {
+            \Storage::disk('public')->delete($news->image);
+        }
+
         $news->delete();
 
         return redirect()->route('news.index')->with('success', 'News item deleted successfully!');
     }
 }
-
-

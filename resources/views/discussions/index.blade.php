@@ -31,13 +31,23 @@
                         <ul>
                             @foreach ($discussions as $discussion)
                                 <li class="mb-4">
+                                    <!-- Link naar discussie -->
                                     <a href="{{ route('discussions.show', $discussion->id) }}" 
                                         class="text-blue-500 hover:underline">
                                         {{ $discussion->title }}
                                     </a>
                                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                                        By {{ $discussion->author->name ?? 'Unknown' }} | 
-                                        {{ $discussion->created_at->format('d M Y') }}
+                                        By 
+                                        <!-- Link naar profiel van de auteur -->
+                                        @if ($discussion->author)
+                                            <a href="{{ route('profile.show', $discussion->author->id) }}" 
+                                                class="text-blue-500 hover:underline">
+                                                {{ $discussion->author->username ?? 'Unknown Username' }}
+                                            </a>
+                                        @else
+                                            Unknown Author
+                                        @endif
+                                        | {{ $discussion->created_at->format('d M Y') }}
                                     </p>
                                 </li>
                             @endforeach
